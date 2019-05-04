@@ -12,7 +12,7 @@ import org.testng.annotations.Parameters;
 
 public class BaseTest implements AutoConst
 {
-	public WebDriver driver = null;
+	public static WebDriver driver = null;
 	public WebDriverWait wait = null;
 	
 	@Parameters("browser")
