@@ -9,27 +9,27 @@ import com.craftsvilla.generic.BasePage;
 
 public class HomePage extends BasePage
 {
+	@FindBy(xpath="//span[text()='Sign In']")
+	private WebElement signInButton;
 	
 	@FindBy(id="cartCount")
-	private WebElement cartLink;	
+	private WebElement cartLink;
 	
-	@FindBy(xpath="//span[text()='Sign In']")
-	private WebElement signInLink;
-	
-	@FindBy(name="q")
+	@FindBy(css="input[id='searchval']")
 	private WebElement searchBox;
 	
 	@FindBy(xpath="//a[@href='/womens-clothing/sarees/?MID=megamenu_sarees_seeall']")
 	private WebElement sareesLink;
 	
-	@FindBy(linkText ="About us")
-	private WebElement aboutUsLink;
+	@FindBy(xpath="//a[@href='/jewellery/necklaces/?MID=megamenu_jewellery_seeall']")
+	private WebElement jewelleryLink;
 	
-	@FindBy(partialLinkText="Secure Payment")
-	private WebElement securePaymentOptionsLink;
+	@FindBy(xpath ="//span[text()='My Account']")
+	private WebElement account;
 	
+	@FindBy(xpath = "//img[contains(@src,'logout.png')]")
+	private WebElement logoutBtn;
 	
-	//Initialization
 	
 	public HomePage(WebDriver driver)
 	{
@@ -38,47 +38,49 @@ public class HomePage extends BasePage
 		
 	}
 	
-	public void clickOncartLink()
+	public void clickOnSignInButton()
 	{
 		try
 		{
-			verifyElementPresent(cartLink);
-			cartLink.click();
-			log.info("Clicked on "+cartLink);
+			verifyElementPresent(signInButton);
+			signInButton.click();
+			log.info("clicked on "+signInButton);
 		}
 		catch(Exception e)
 		{
-			log.error("Unable to click on "+cartLink+" : "+e);
+			log.error("Unable to click on "+signInButton+e);
 		}
+		
+
 	}
 	
-	
-	public void clickOnSignInLink()
+	public void clickOnCartLink()
 	{
-		try
-		{
-			verifyElementPresent(signInLink);
-			signInLink.click();
-			log.info("Clicked on "+signInLink);
+		try {
+		verifyElementPresent(cartLink);
+		cartLink.click();
+		log.info("Clicked on "+cartLink);
 		}
 		catch(Exception e)
 		{
-			log.error("Unable to click on "+signInLink+" : "+e);
+			log.error("Unable to click on "+cartLink+e);
 		}
+		
 	}
 	
-	public void setSearchText(String searchString)
+	public void setValueToSearchBox(String searchvalue)
 	{
 		try
 		{
-			verifyElementPresent(searchBox);
-			searchBox.sendKeys(searchString);
-			log.info(searchString+" has been set to "+searchBox);
+		verifyElementPresent(searchBox);
+		searchBox.sendKeys(searchvalue);
+		log.info(searchvalue+"has been set to "+searchBox);
 		}
 		catch(Exception e)
 		{
-			log.error("");
+			log.error("Unable to set the value to "+searchBox+e);
 		}
+		
 	}
 	
 	public void goToSareesLink()
@@ -86,14 +88,55 @@ public class HomePage extends BasePage
 		try
 		{
 			verifyElementPresent(sareesLink);
-			mouseHover(sareesLink);
-			log.info("");
+			mouseHover( sareesLink);
 		}
 		catch(Exception e)
 		{
-			log.error("");
+			log.error("Could not mouse hover on "+sareesLink+e);
 		}
+		
 		
 	}
 	
+	public void goToJewellery()
+	{
+		try
+		{
+		verifyElementPresent(jewelleryLink);
+		mouseHover( jewelleryLink);
+		}
+		catch(Exception e)
+		{
+			log.error("Could not mouse hover on "+jewelleryLink+e);
+		}
+		
+	}
+
+	public void gotoAccount()
+	{
+		try
+		{
+		verifyElementPresent(account);
+		mouseHover(account);
+		}
+		catch(Exception e)
+		{
+			
+		}
+	}
+	
+	public boolean clickOnLogout()
+	{
+		try
+		{
+		verifyElementPresent(logoutBtn);
+		logoutBtn.click();
+		return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
+
 }
